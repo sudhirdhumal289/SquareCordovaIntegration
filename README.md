@@ -11,7 +11,11 @@ A Cordova plugin to interface with the native Square Reader POS SDKs.
 ## Install the Square SDK
 
 Square Reader SDK is included in the plugin. But it is recommended to upgrade the SDK.
-Currently we only support [iOS](https://docs.connect.squareup.com/payments/readersdk/setup-ios)
+Currently we only support iOS.
+
+For more details refer [Square Reader SDK Documentation](https://docs.connect.squareup.com/payments/readersdk/setup-ios).
+Step 2 can be skipped as plugins comes with integrated Square Reader SDK.
+Sub Step from Step 3 - "Update your Info.plist" can be skipped. Plugin will auto configure this.
 
 ## Pair the card reader
 
