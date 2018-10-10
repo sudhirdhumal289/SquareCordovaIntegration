@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Receipt</title>
+        <meta name="viewport" content="width=320"/>
+        <link href="print.css" rel="stylesheet" type="text/css" />
+        <link href="receipt.css" rel="stylesheet" type="text/css" />
+    </head>
+    
+    <body>
+        <div class="single-column-header">
+            <h1></h1>
+            
+            <div class="header line">
+                <div class="left">
+                    <div class="address"></div>
+                    <div class="date"></div>
+                    <div class="time"></div>
+                    <div class="employee"></div>
+                    <div class="phone"></div>
+                    <div class="au-business-number"></div>
+                    <div class="url"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="double-column-header">
+            <h1></h1>
+            
+            <div class="header line">
+                <div class="right">
+                    <div class="date"></div>
+                    <div class="time"></div>
+                    <div class="employee"></div>
+                </div>
+                <div class="address"></div>
+                <div class="phone"></div>
+                <div class="au-business-number"></div>
+                <div class="url"></div>
+                <div class="jp-formal-receipt-receipt-number"></div>
+            </div>
+        </div>
+
+        <!-- JP formal receipts include additional headers. -->
+        <div class="jp-formal-receipt-header">
+        </div>
+
+        <div class="jp-formal-receipt-buyer-name">
+        </div>
+
+        <div class="receipt-body">
+
+            <div class="subheader">
+                <div class="transaction-metadata line">
+                    <div class="receipt-identification line">
+                        <div class="left">
+                            <div class="ticket-identifier"></div>
+                            <div class="authorization-code"></div>
+                            <div class="receipt-number"></div>
+                            <div class="sequential-tender-number"></div>
+                            <div class="tax-ids"></div>
+                            <div class="digital-signature"></div>
+                            <div class="jp-formal-receipt-date"></div>
+                        </div>
+                        <div class="right">
+                            <div class="payment-source-info">
+                                <div class="line">
+                                    <div class="label"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="emv-metadata line">
+                    <div class="left">
+                        <div class="emv-application-preferred-name"></div>
+                        <div class="emv-aid"></div>
+                        <div class="card-verification-method"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="sale line-items-section">
+                <div class="section-label"></div>
+                <div class="line-items">
+                    <div class="line">
+                        <div class="dining-option"></div>
+                        <div class="left label">
+                            <div>
+                                <span class="name strong"></span>
+                                <span class="quantity"></span>
+                                <span class="no-tax-marker"></span>
+                            </div>
+                        </div>
+                        
+                        <div class="right fee-legend-symbol"></div>
+                        <div class="right amount strong"></div>
+                        
+                        <div class="left price-modifiers-note">
+                            <div class="price"></div>
+                            <div class="modifiers"></div>
+                            <div class="note italic"></div>
+                            <div class="comp"></div>
+                        </div>
+                        <div class="comps">
+                            <div class="left label name"></div>
+                            <div class="right amount"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="discount">
+                    <div class="line-items">
+                        <div class="line">
+                            <div class="left label">
+                                <span class="name strong"></span>
+                                <span class="percentage"></span>
+                            </div>
+                            <div class="right amount"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="total-modifiers">
+                    <div class="pre-payment">
+                        <div class="subtotal line">
+                            <div class="left label">Subtotal</div>
+                            <div class="right amount"></div>
+                        </div>
+                        
+                        <div class="auto-gratuity line">
+                            <div class="left label"></div>
+                            <div class="right amount"></div>
+                        </div>
+                        
+                        <div class="taxes">
+                            <div class="line">
+                                <div class="left label"></div>
+                                <div class="right amount"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="post-payment">
+                        <div class="tip line">
+                            <div class="left label"></div>
+                            <div class="right amount"></div>
+                        </div>
+                        
+                        <div class="swedish-rounding line">
+                            <div class="left label"></div>
+                            <div class="right amount"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="auto-gratuity-notice">
+                    <div class="auto-gratuity-notice-content"></div>
+                </div>
+            </div>
+            <!-- Return line items section mirrors the sale line item section except for auto gratutity notice -->
+            <div class="return line-items-section">
+                <div class="section-label"></div>
+                <div class="line-items no-border">
+                    <div class="line">
+                        <div class="dining-option"></div>
+                        <div class="left label">
+                            <div>
+                                <span class="name strong"></span>
+                                <span class="quantity"></span>
+                                <span class="no-tax-marker"></span>
+                            </div>
+                        </div>
+                        
+                        <div class="right fee-legend-symbol"></div>
+                        <div class="right amount strong"></div>
+                        
+                        <div class="left price-modifiers-note">
+                            <div class="price"></div>
+                            <div class="modifiers"></div>
+                            <div class="note italic"></div>
+                            <div class="comp"></div>
+                        </div>
+                        <div class="comps">
+                            <div class="left label name"></div>
+                            <div class="right amount"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="discount">
+                    <div class="line-items">
+                        <div class="line">
+                            <div class="left label">
+                                <span class="name strong"></span>
+                                <span class="percentage"></span>
+                            </div>
+                            <div class="right amount"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="total-modifiers">
+                    <div class="pre-payment">
+                        <div class="subtotal line">
+                            <div class="left label">Subtotal</div>
+                            <div class="right amount"></div>
+                        </div>
+
+                        <div class="auto-gratuity line">
+                            <div class="left label"></div>
+                            <div class="right amount"></div>
+                        </div>
+
+                        <div class="taxes">
+                            <div class="line">
+                                <div class="left label"></div>
+                                <div class="right amount"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="post-payment">
+                        <div class="tip line">
+                            <div class="left label"></div>
+                            <div class="right amount"></div>
+                        </div>
+                        
+                        <div class="swedish-rounding line">
+                            <div class="left label"></div>
+                            <div class="right amount"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="totals">
+            <div class="total line strong">
+                <div class="left">
+                    <div class="label">Total</div>
+                </div>
+                <div class="right amount"></div>
+            </div>
+            
+            <div class="tax-included">
+                <div class="line">
+                    <div class="left label"></div>
+                </div>
+            </div>
+            
+            <div class="single-tender-payment-method">
+                <div class="line">
+                    <div class="left label"></div>
+                    <div class="right amount"></div>
+                </div>
+                <div class="change line">
+                    <div class="left label"></div>
+                    <div class="right amount"></div>
+                </div>
+                <div class="cardholder line"></div>
+            </div>
+            <div class="auth-slip-payment-source">
+                <div class="line">
+                    <div class="left label"></div>
+                    <div class="right amount"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="payment-methods-section">
+            <div class="payment-methods-bill">
+                <div class="cash-section">
+                    <div class="pre-tip-amount line">
+                        <div class="left label">Amount</div>
+                        <div class="right amount"></div>
+                    </div>
+                    <div class="tendered-amount line">
+                        <div class="left label">Tendered</div>
+                        <div class="right amount"></div>
+                    </div>
+                    <div class="change-amount line">
+                        <div class="left label">Change</div>
+                        <div class="right amount"></div>
+                    </div>
+                </div>
+                
+                <div class="card-section">
+                    <div class="pre-tip-amount line">
+                        <div class="left label">Amount</div>
+                        <div class="right amount"></div>
+                    </div>
+                    <div class="tip-amount line">
+                        <div class="left label">Tip</div>
+                        <div class="right amount"></div>
+                    </div>
+                    <div class="total-charged-amount line">
+                        <div class="left label">Charged</div>
+                        <div class="right amount"></div>
+                    </div>
+                    <div class="cardholder line"></div>
+                </div>
+                
+                <div class="other-section">
+                    <div class="pre-tip-amount line">
+                        <div class="left label">Total</div>
+                        <div class="right amount"></div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+
+        <div class="tax-breakdown-section">
+            <table class="tax-breakdown-table"></table>
+        </div>
+        
+        <div class="payment-method-subtitle line"></div>
+        
+        <div class="refunds">
+            <div class="refund">
+                <div class="line refunded-info">
+                    <div class="left">
+                        <div class="source strong"></div>
+                        <div class="reason strong"></div>
+                        <div class="date"></div>
+                    </div>
+                    <div class="right amount strong"></div>
+                </div>
+                <div class="line giftcard">
+                    <div class="left label">Updated Balance</div>
+                    <div class="right balance strong"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="paper-signature">
+            <div class="traditional-tip">
+                <div class="tip line">
+                    <div class="left label">Tip</div>
+                    <div class="right amount write-in">&nbsp;</div>
+                </div>
+                <div class="total line">
+                    <div class="left label">Total</div>
+                    <div class="right amount write-in">&nbsp;</div>
+                </div>
+            </div>
+            <div class="quick-tip">
+                <div class="box">
+                    <div class="title-bar strong"></div>
+                    <div class="options-box">
+                        <div class="line">
+                            <div class="checkbox"></div>
+                            <div class="tip-label"></div>
+                        </div>
+                    </div>
+                    <div class="custom-tip strong">
+                        <div class="checkbox"></div>
+                        <div class="tip-label">
+                            <div class="write-in">&nbsp;</div>
+                            <div id="custom-tip-label">(DNL) CUSTOM TIP</div>
+                        </div>
+                        <div class="total-label strong">
+                            <div class="write-in">&nbsp;</div>
+                            <div id="custom-total-label">(DNL) TOTAL</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="signature line">
+                <div class="times-symbol">&times;</div>
+                <div class="write-in">&nbsp;</div>
+            </div>
+            <div class="cardholder line"></div>
+            <div class="agreement line">
+                <span>I agree to pay the above total amount according to my card issuer agreement.</span>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <div class="remaining-balance line">
+                <div id="remaining-balance-label" class="left label">Remaining Balance</div>
+                <div id="remaining-balance-amount" class="right amount"></div>
+            </div>
+        </div>
+
+        <!-- A description of the transaction, used instead of itemization. -->
+        <div class="jp-formal-receipt-item-line">
+        </div>
+
+        <!-- A formal "We received this much money for this item" statement. -->
+        <div class="jp-formal-receipt-item-line-received-statement">
+        </div>
+
+        <!-- Empty space for multiple purposes in JP. -->
+        <div class="jp-formal-receipt-space">
+        </div>
+
+        <div class="custom-receipt-text"></div>
+
+        <div class="return-policy line"></div>
+
+        <div class="disclaimer-tax-line">
+            <div class="left non-taxable-item-disclaimer"></div>
+            <div class="tax-invoice"></div>
+        </div>
+
+        <div class="merchant-or-customer-copy line"></div>
+        
+        <div class="device-information-footer">
+         <div class="device-information line">
+           <div class="left label"></div>
+           <div class="right amount"></div>
+       </div>
+    </body>
+</html>

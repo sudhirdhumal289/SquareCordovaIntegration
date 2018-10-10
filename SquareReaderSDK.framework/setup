@@ -1,0 +1,69 @@
+#!/bin/sh
+
+# Unpack frameworks
+MAIN_FRAMEWORKS_DIR="$BUILT_PRODUCTS_DIR/$FRAMEWORKS_FOLDER_PATH"
+NESTED_FRAMEWORKS_DIR="$MAIN_FRAMEWORKS_DIR/SquareReaderSDK.framework/Frameworks"
+
+# Don't choke if projects or targets have spaces in the name
+OLDIFS=$IFS
+IFS=$(echo "")
+
+if [ -d "$NESTED_FRAMEWORKS_DIR" ]; then
+	find "$NESTED_FRAMEWORKS_DIR" -name '*.framework' -type d | while read -r FRAMEWORK
+	do
+		rm -rf "$MAIN_FRAMEWORKS_DIR/$(basename $FRAMEWORK)/"
+		mv -f "$FRAMEWORK/" $MAIN_FRAMEWORKS_DIR
+	done
+	rm -rf "$NESTED_FRAMEWORKS_DIR/"
+fi
+
+IFS=$OLDIFS
+
+# Remove unused architectures if archiving
+if [ "$ACTION" = "install" ]; then
+	FRAMEWORKS_PATH="${TARGET_BUILD_DIR}/${WRAPPER_NAME}/Frameworks"
+	READER_SDK_FRAMEWORKS=("CorePaymentCard.framework" "SquareCore.framework" "SquareReader.framework" "SquareReaderSDK.framework")
+
+	for FRAMEWORK in "${READER_SDK_FRAMEWORKS[@]}"; do
+		FRAMEWORK_EXECUTABLE_NAME=$(defaults read "$FRAMEWORKS_PATH/$FRAMEWORK/Info.plist" CFBundleExecutable)
+		FRAMEWORK_EXECUTABLE_PATH="$FRAMEWORKS_PATH/$FRAMEWORK/$FRAMEWORK_EXECUTABLE_NAME"
+		# echo "Executable is $FRAMEWORK_EXECUTABLE_PATH"
+
+		EXTRACTED_ARCHS=()
+
+		for ARCH in $ARCHS
+		do
+			# echo "Extracting $ARCH from $FRAMEWORK_EXECUTABLE_NAME"
+			lipo -extract "$ARCH" "$FRAMEWORK_EXECUTABLE_PATH" -o "$FRAMEWORK_EXECUTABLE_PATH-$ARCH"
+			EXTRACTED_ARCHS+=("$FRAMEWORK_EXECUTABLE_PATH-$ARCH")
+		done
+
+		# echo "Merging extracted architectures: ${ARCHS}"
+		lipo -o "$FRAMEWORK_EXECUTABLE_PATH-merged" -create "${EXTRACTED_ARCHS[@]}"
+		rm "${EXTRACTED_ARCHS[@]}"
+
+		# echo "Replacing original executable with thinned version"
+		rm "$FRAMEWORK_EXECUTABLE_PATH"
+		mv "$FRAMEWORK_EXECUTABLE_PATH-merged" "$FRAMEWORK_EXECUTABLE_PATH"
+	done
+fi
+
+# Don't choke if projects or targets have spaces in the name
+OLDIFS=$IFS
+IFS=$(echo "")
+
+# Delete this script if archiving
+if [ "$ACTION" = "install" ]; then
+	rm -- $0
+fi
+
+# Codesign
+for filename in "${CODESIGNING_FOLDER_PATH}/Frameworks/*.framework"; do
+	codesign --force --sign "${EXPANDED_CODE_SIGN_IDENTITY}" $filename
+	if [ $? != 0 ]; then
+		echo "error: Code signing failed."
+		exit 1
+	fi
+done
+
+IFS=$OLDIFS

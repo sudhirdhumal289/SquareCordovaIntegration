@@ -1,0 +1,44 @@
+body {
+  margin: 20px;
+  font: 16px "SQ Market", sans-serif;
+  line-height: 20px;
+  color: #000;
+
+  /* improves legibility on dirty printers: */
+  /* See RI-8019 */
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  -webkit-text-stroke: 1px rgba(0,0,0,0.5);
+}
+
+h1 {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 30px;
+  margin: 20px 0;
+  -webkit-text-stroke: initial;
+}
+
+strong, .strong {
+  font-weight: 500;
+  -webkit-text-stroke: initial;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.left {
+  float: left;
+  text-align: left;
+}
+
+.right {
+  float: right;
+  text-align: right;
+}
+
+.line:after {
+  /* Clearfix */
+  content: " "; display: block; height: 0; clear: both;
+}

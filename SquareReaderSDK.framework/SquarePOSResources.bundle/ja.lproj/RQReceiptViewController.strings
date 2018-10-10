@@ -1,0 +1,9 @@
+
+/* Class = "IBUILabel"; text = "<DNL>How do you want to receive your digital receipts?</DNL>"; ObjectID = "OxA-Ke-kZu"; */
+"OxA-Ke-kZu.text" = "<DNL>How do you want to receive your digital receipts?</DNL>";
+
+/* Class = "IBUILabel"; text = "<DNL>Digital receipts delivered by Square. See your digital receipt for privacy policy and preferences.</DNL>"; ObjectID = "n8A-AD-yjE"; */
+"n8A-AD-yjE.text" = "<DNL>Digital receipts delivered by Square. See your digital receipt for privacy policy and preferences.</DNL>";
+
+/* Class = "IBUIButton"; normalTitle = "<DNL>"; ObjectID = "noG-6I-e7F"; */
+"noG-6I-e7F.normalTitle" = "<DNL>";

@@ -1,0 +1,30 @@
+{
+  "name": "cordova-plugin-square-reader",
+  "version": "0.0.1",
+  "description": "Provide functionality to integrate the Square Reader SDK integration in iOS / Android app.",
+  "cordova": {
+    "id": "cordova-plugin-square-reader",
+    "platforms": [
+      "ios"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sudhirdhumal289/SquareCordovaIntegration.git"
+  },
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-ios",
+    "square",
+    "square-reader"
+  ],
+  "author": "Sudhir Dhumal",
+  "license": "Apache License Version 2.0",
+  "bugs": {
+    "url": "https://github.com/sudhirdhumal289/SquareCordovaIntegration/issues"
+  },
+  "homepage": "https://github.com/sudhirdhumal289/SquareCordovaIntegration#readme",
+  "publishConfig": {
+    "access": "public"
+  }
+}

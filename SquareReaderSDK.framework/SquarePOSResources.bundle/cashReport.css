@@ -1,0 +1,58 @@
+.header .name {
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 24px;
+    margin-top: -2px;
+    padding-bottom: 10px;
+    word-wrap: break-word;
+    width: 100%;
+}
+
+.line-items .title {
+    padding-right: 40%;
+    text-align: left;
+    font-size: 16px;
+    line-height: 16px;
+    font-weight: bold;
+}
+
+.employees {
+    margin-top: 20px;
+}
+
+.container {
+    border-bottom: 3px solid #000;
+    margin-bottom: 20px;
+}
+
+.line {
+    padding-bottom: 20px;
+}
+
+.line-items .left {
+    width: 60%;
+    text-align: left;
+}
+
+.line-items .right {
+    width: 35%;
+    text-align: right;
+}
+
+.line-items .bold {
+    font-weight: bold;
+}
+
+.line-items .paid-in-out {
+    border-bottom: 3px solid #000;
+}
+
+.line-items .paid-in-out .line .note {
+    font-size: 12px;
+    word-wrap: break-word;
+}
+
+.line-items .underline {
+    height: 20px;
+    border-bottom: 1px solid #000;
+}

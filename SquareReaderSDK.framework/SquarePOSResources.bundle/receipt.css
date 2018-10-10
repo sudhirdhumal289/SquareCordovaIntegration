@@ -1,0 +1,409 @@
+body {
+    line-height: 1.5em;
+    font-size: 14px;
+}
+
+/* Header */
+
+h1 {
+    word-wrap: break-word;
+    margin: 0;
+    font-size: 18px;
+    line-height: 22px;
+}
+
+.header {
+    margin: 0;
+    padding: 12px 0 15px 0;
+}
+
+.double-column-header .right {
+    white-space: nowrap;
+    padding-left: 10px;
+}
+
+/* Receipt body, itemizations, discounts, subtotal modifiers: */
+
+.receipt-body {
+    border-top: 3px solid black;
+    border-bottom: 3px solid black;
+}
+
+.subheader .left {
+    padding-bottom: 2px;
+}
+
+.receipt-body > div:not(.line-items-section) {
+    padding: 8px 0;
+}
+
+.receipt-body > div:not(:first-child):not(.line-items-section) {
+    border-top: 1px solid black;
+}
+
+.line-items-section > div:not(:first-child):not(.no-border) {
+    border-top: 1px solid black;
+}
+
+.line-items-section > div:not(.section-label):not(.dining-option) {
+    padding: 8px 0;
+}
+
+.emv-metadata {
+    border-top: 1px solid black;
+    margin-top: 8px;
+    padding-top: 8px;
+    width: 100%;
+}
+
+.price {
+    white-space: nowrap;
+}
+
+.line-items .line:first-child .dining-option {
+    margin-top: -9px;
+    border-top: none;
+}
+
+.line-items .line .dining-option {
+    border-top: 1px solid #000;
+    font-size: 12px;
+    line-height: 16pt;
+    text-align: center;
+    margin-bottom: 12px;
+    border-bottom: 1px solid #000;
+}
+
+.receipt-body {
+    margin-bottom: 12px;
+}
+
+.section-label {
+    background: #000;
+    color: #FFF;
+    text-align: center;
+    font-weight: bold;
+}
+
+.line-items .price-modifiers-note {
+    clear: both;
+}
+
+.line-items .line .comps {
+    clear: both;
+    padding-top: 12px
+}
+
+.line-items .line .fee-legend-symbol {
+    margin-left: 7px;
+}
+
+.receipt-body .quantity::before {
+    /* \00a0 == nbsp; */
+    content: '×\00a0';
+}
+
+.total .amount {
+    font-size: 16px;
+}
+
+/* Tax Breakdown Table */
+
+.tax-breakdown-table {
+    margin-top: 10px;
+    width: 100%;
+}
+
+.tax-breakdown-table tr {
+    width: 100%;
+    line-height: 1.3em;
+}
+
+.tax-breakdown-table tr td {
+    text-align: right;
+}
+
+.tax-breakdown-table tr td:first-child {
+    text-align: left;
+}
+
+/* Auto-Gratuity */
+.auto-gratuity-notice {
+    border-top: 1px solid black;
+}
+
+.auto-gratuity-notice-content {
+    margin: 8px 48px;
+    text-align: center;
+}
+
+/* Paper Signature */
+
+.paper-signature .quick-tip .line {
+    margin-bottom: 12px;
+}
+
+.paper-signature .traditional-tip .line {
+    padding-top: 22px;
+}
+
+.paper-signature .write-in {
+    border-bottom: 1px solid #000;
+}
+
+.paper-signature .line .right {
+    width: 60%;
+}
+
+.paper-signature .signature {
+    margin-top: 55px;
+}
+
+.paper-signature .signature .times-symbol {
+    float: left;
+}
+
+.paper-signature .signature .write-in {
+    float: right;
+    width: 95%;
+    display: inline-block;
+}
+
+.paper-signature .cardholder {
+    font-size: 13px;
+    padding-top: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+    text-align: center;
+}
+
+.paper-signature .agreement {
+    font-size: 13px;
+    line-height: 16px;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    text-align: center;
+}
+
+
+/* Footer */
+
+.footer {
+    padding-top: 20px;
+    font-size: 13px;
+}
+
+.footer .line .left {
+    width: 40%;
+}
+
+.footer .line .right {
+    width: 60%;
+}
+
+.footer .remaining-balance {
+    font-size: 16px;
+    padding-bottom: 20px;
+}
+
+#remaining-balance-label {
+    width: 70%;
+}
+
+#remaining-balance-amount {
+    width: 30%;
+}
+
+.disclaimer-tax-line {
+    font-size: 12px;
+}
+
+.disclaimer-tax-line .center {
+    text-align: center;
+}
+
+/* Refunds */
+
+.refunds {
+    border-top: 1px solid #000;
+    padding-top: 8px;
+    margin-top: 12px;
+}
+
+.refunds .refund {
+    padding-bottom: 12px
+}
+
+.refunds .refund .left {
+    width: 60%;
+}
+
+.refunds .refund .right {
+    width: 40%;
+}
+
+/* Quick Tip */
+
+.quick-tip {
+    margin-top: 18px;
+}
+
+.quick-tip .box {
+    border: 1.33px solid #000;
+}
+
+.quick-tip .title-bar,
+.quick-tip .custom-tip {
+    text-align: center;
+    height: 20px;
+    font-size: 11px;
+    letter-spacing: 0.025em;
+}
+
+.quick-tip .title-bar {
+    background-color: #000;
+    color: #FFF;
+}
+
+.quick-tip .options-box {
+    padding-top: 20px;
+    font-size: 14px;
+}
+
+.quick-tip .options-box,
+.quick-tip .custom-tip {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.quick-tip .checkbox {
+    border: 1.33px solid #000;
+    width: 11px;
+    height: 11px;
+    display: inline-block;
+    float: left;
+    margin-top: 4px;
+    margin-right: 7px;
+}
+
+.quick-tip .tip-label {
+    float: left;
+    text-align: left;
+}
+
+.quick-tip .total-label {
+    float: right;
+    text-align: left;
+}
+
+.quick-tip .options-box .tip-label .percentage,
+.quick-tip .options-box .total-label .total-amount,
+.quick-tip .options-box .total-label .label {
+    font-weight: 500;
+}
+
+.quick-tip .custom-tip {
+    padding-top: 5px;
+    padding-bottom: 40px;
+}
+
+.quick-tip .custom-tip .tip-label,
+.quick-tip .custom-tip .total-label {
+    width: 43%;
+}
+
+/* Split Tender */
+
+.payment-method-subtitle {
+    padding-left: 20px;
+}
+
+/* Return policy */
+
+.return-policy {
+    padding-top: 20px;
+    text-align: center;
+    line-height: 18px;
+}
+
+/* Custom Receipt Text */
+
+.custom-receipt-text {
+    padding-top: 20px;
+    text-align: center;
+    line-height: 18px;
+    word-wrap: break-word;
+}
+
+/* Merchant or Customer Copy */
+
+.merchant-or-customer-copy {
+    padding-top: 20px;
+    text-align: center;
+    line-height: 18px;
+}
+
+/* Device Information */
+
+.device-information {
+  margin-top: 20px;
+  padding-top: 20px;
+  text-align: center;
+  border-top: 1px solid black;
+}
+
+.device-information-footer .line .left {
+    width: 80%;
+}
+
+.device-information-footer .line .right {
+    width: 20%;
+}
+
+/* JP formal receipts */
+
+.jp-formal-receipt-header {
+    word-wrap     : break-word;
+    font-size     : 20px;
+    font-weight   : 400;
+    text-align    : center;
+}
+
+.jp-formal-receipt-buyer-name {
+    margin-top    : 30px;
+    margin-bottom : 35px;
+    border-bottom : 1px solid black;
+    text-align    : right;
+    line-height   : 26px;
+}
+
+.jp-formal-receipt-item-line {
+    margin-top    : 20px;
+    margin-bottom : 15px;
+    text-align    : left;
+}
+
+.jp-formal-receipt-item-line-received-statement {
+    text-align    : center;
+    border-top    : none;
+    border-bottom : none;
+    margin-bottom : 15px;
+}
+
+.jp-formal-receipt-space {
+    height : 120px;
+}
+
+/* Reducing line item line height, as well as padding between line items in printed receipts.
+ * Currently used only by RST. */
+
+.condensed-receipt .line-items .line .comps {
+    /* Reduced from 12px */
+    padding-top: 6px
+}
+
+.condensed-receipt .line-items .line {
+    /* Reduced from 1.5em */
+    line-height: 1.25;
+}
