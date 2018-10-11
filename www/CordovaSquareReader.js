@@ -1,10 +1,6 @@
 function CordovaSquareReader() {
 }
 
-CordovaSquareReader.prototype.setup = function (successCallback, errorCallback) {
-  cordova.exec(successCallback, errorCallback, "CordovaSquareReader", "setup", []);
-};
-
 CordovaSquareReader.prototype.retrieveAuthorizationCode = function (params, successCallback, errorCallback) {
   cordova.exec(successCallback, errorCallback, "CordovaSquareReader", "retrieveAuthorizationCode", [params]);
 };

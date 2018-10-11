@@ -7,59 +7,35 @@ import AVKit
     private var currentCommand: CDVInvokedUrlCommand?
     private var locationPermissionCallback: ((Bool) -> ())?
     
-    @objc(setup:)
-    func setup(command: CDVInvokedUrlCommand) {
-        self.locationManager.delegate = self
+    override func pluginInitialize() {
+        requestLocationPermission()
+        requestMicrophonePermission()
         
-        func requestLocationPermission(callback: @escaping (Bool) -> ()) {
-            switch CLLocationManager.authorizationStatus() {
-            case .notDetermined:
-                self.locationPermissionCallback = callback
-                self.locationManager.requestWhenInUseAuthorization()
-            case .restricted, .denied:
-                print("Show UI directing the user to the iOS Settings app")
-                callback(false)
-            case .authorizedAlways, .authorizedWhenInUse:
-                print("Location services have already been authorized.")
-                callback(true)
-            }
-        }
+        print("Square SDK initialization started.")
         
-        func requestMicrophonePermission(callback: @escaping (Bool) -> ()) {
-            // Note: The microphone permission prompt will not be displayed
-            // when running on the simulator
-            AVAudioSession.sharedInstance().requestRecordPermission { authorized in
-                callback(authorized)
-            }
-        }
-        
-        requestLocationPermission() { locationSuccess in
-            self.locationPermissionCallback = nil
-            
-            if locationSuccess {
-                requestMicrophonePermission() { microphoneSuccess in
-                    if microphoneSuccess {
-                        SQRDReaderSDK.initialize(applicationLaunchOptions: nil)
-                        
-                        self.commandDelegate.send(CDVPluginResult(status: CDVCommandStatus_OK), callbackId: command.callbackId)
-                        return
-                    } else {
-                        self.commandDelegate.send(CDVPluginResult(status: CDVCommandStatus_ERROR), callbackId: command.callbackId)
-                    }
-                }
-            } else {
-                self.commandDelegate.send(CDVPluginResult(status: CDVCommandStatus_ERROR), callbackId: command.callbackId)
-            }
+        // Initialize Square SDK on plugin load
+        SQRDReaderSDK.initialize(applicationLaunchOptions: nil)
+    }
+    
+    func requestLocationPermission() {
+        switch CLLocationManager.authorizationStatus() {
+        case .notDetermined:
+            self.locationManager.requestWhenInUseAuthorization()
+        case .restricted, .denied:
+            print("Show UI directing the user to the iOS Settings app")
+        case .authorizedAlways, .authorizedWhenInUse:
+            print("Location services have already been authorized.")
         }
     }
     
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        if status == .authorizedAlways || status == .authorizedWhenInUse {
-            self.locationPermissionCallback?(true)
-            return
+    func requestMicrophonePermission() {
+        // Note: The microphone permission prompt will not be displayed
+        // when running on the simulator
+        AVAudioSession.sharedInstance().requestRecordPermission { authorized in
+            if !authorized {
+                print("Show UI directing the user to the iOS Settings app")
+            }
         }
-
-        self.locationPermissionCallback?(false)
     }
     
     @objc(retrieveAuthorizationCode:)
@@ -71,14 +47,14 @@ import AVKit
                 self.commandDelegate.send(CDVPluginResult(status: CDVCommandStatus_ERROR, messageAs: "No personal access token passed"), callbackId: command.callbackId)
                 
                 return authorizationCode
-            }
+        }
         
         guard let commandParamsTwo = command.arguments.first as? [String: Any],
             let locationId = commandParamsTwo["locationId"] as? String else {
                 self.commandDelegate.send(CDVPluginResult(status: CDVCommandStatus_ERROR, messageAs: "No location ID specified"), callbackId: command.callbackId)
                 
                 return authorizationCode
-            }
+        }
         
         let parameters = ["location_id": locationId]
         
