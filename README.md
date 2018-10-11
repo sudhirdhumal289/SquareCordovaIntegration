@@ -19,10 +19,10 @@ Sub Step from Step 3 - "Update your Info.plist" can be skipped. Plugin will auto
 ## Pair the card reader
 
 ```javascript
-window['squarereader'].setup(function () {
-    console.log("SquareReaderSDK initiated")
+window['squarereader'].pairCardReaders(function () {
+    console.log('Square card reader completed.');
 }, function (err) {
-    console.error("SquareReaderSDK initialization failed.");
+    console.error('Square card reader pairing failed.');
     console.error(err);
 });
 ```
@@ -45,7 +45,7 @@ window['squarereader'].retrieveAuthorizationCode(retrieveAuthParams, function (r
         console.log("Application is authorized.");
 
         let checkoutParam = {
-            "amount": "1"
+            "amount": "<AMOUNT_TO_AUTHORIZE"
         }
         window['squarereader'].startCheckout(checkoutParam, function (response) {
             console.log(response);
