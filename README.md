@@ -14,7 +14,6 @@ Square Reader SDK is included in the plugin. But it is recommended to upgrade th
 Currently we only support iOS.
 
 For more details refer [Square Reader SDK Documentation](https://docs.connect.squareup.com/payments/readersdk/setup-ios).
-Step 2 can be skipped as plugins comes with integrated Square Reader SDK.
 Sub Step from Step 3 - "Update your Info.plist" can be skipped. Plugin will auto configure this.
 
 ## Pair the card reader

@@ -1,9 +1,0 @@
-
-/* Class = "IBUIButton"; normalTitle = "<DNL>Learn about Square Stand<DNL>"; ObjectID = "GYy-MJ-IeP"; */
-"GYy-MJ-IeP.normalTitle" = "<DNL>Learn about Square Stand<DNL>";
-
-/* Class = "IBUILabel"; text = "<DNL>For help troubleshooting your Square Stand, visit the Help Center.<DNL>"; ObjectID = "Ly6-rU-HZd"; */
-"Ly6-rU-HZd.text" = "<DNL>For help troubleshooting your Square Stand, visit the Help Center.<DNL>";
-
-/* Class = "IBUILabel"; text = "<DNL>No Square Stand Connected.<DNL>"; ObjectID = "aem-tM-Vab"; */
-"aem-tM-Vab.text" = "<DNL>No Square Stand Connected.<DNL>";

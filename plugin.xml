@@ -19,9 +19,6 @@
         </config-file>
         <source-file src="src/ios/CordovaSquareReader.swift" />
 
-        <source-file src="SquareReaderSDK.framework" target-dir="lib" framework="true" />
-        <framework src="SquareReaderSDK.framework" custom="true" embed="true" />
-
         <config-file target="*-Info.plist" parent="NSLocationWhenInUseUsageDescription">
             <string>This app integrates with Square for card processing. To protect buyers and sellers, Square requires your location to process payments.</string>
         </config-file>
