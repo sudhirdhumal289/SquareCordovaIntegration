@@ -11,11 +11,10 @@ import AVKit
         requestLocationPermission()
         requestMicrophonePermission()
     }
-    
+
+    @objc(setup:)
     func setup() {
-        print("Square SDK initialization started.")
-        
-        // Initialize Square SDK on plugin load
+        // Initialize the Square SDK
         SQRDReaderSDK.initialize(applicationLaunchOptions: nil)
     }
     
@@ -24,18 +23,18 @@ import AVKit
         case .notDetermined:
             self.locationManager.requestWhenInUseAuthorization()
         case .restricted, .denied:
-            print("Show UI directing the user to the iOS Settings app")
+            print("location acess permission denied")
         case .authorizedAlways, .authorizedWhenInUse:
             print("Location services have already been authorized.")
         }
     }
-    
+
     func requestMicrophonePermission() {
-        // Note: The microphone permission prompt will not be displayed
-        // when running on the simulator
         AVAudioSession.sharedInstance().requestRecordPermission { authorized in
             if !authorized {
-                print("Show UI directing the user to the iOS Settings app")
+                print("Denied to access microphone")
+            } else {
+                print("Allowed to access microphone")
             }
         }
     }
