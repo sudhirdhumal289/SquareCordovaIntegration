@@ -13,7 +13,7 @@ import AVKit
     }
 
     @objc(setup:)
-    func setup() {
+    func setup(command: CDVInvokedUrlCommand) {
         // Initialize the Square SDK
         SQRDReaderSDK.initialize(applicationLaunchOptions: nil)
     }
