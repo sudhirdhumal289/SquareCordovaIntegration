@@ -10,7 +10,9 @@ import AVKit
     override func pluginInitialize() {
         requestLocationPermission()
         requestMicrophonePermission()
-        
+    }
+    
+    func setup() {
         print("Square SDK initialization started.")
         
         // Initialize Square SDK on plugin load

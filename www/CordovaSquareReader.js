@@ -19,6 +19,9 @@ CordovaSquareReader.prototype.pairCardReaders = function (successCallback, error
 
 CordovaSquareReader.install = function () {
   window.squarereader = new CordovaSquareReader();
+
+  cordova.exec(successCallback, errorCallback, "CordovaSquareReader", "setup", []);
+
   return window.squarereader;
 };
 
