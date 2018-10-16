@@ -63,6 +63,10 @@ import AVKit
     func retrieveAuthorizationCode(command: CDVInvokedUrlCommand) -> String {
         // If already authorized then do not authorize again.
         if SQRDReaderSDK.shared.isAuthorized &&  self.authorizationCode != "" {
+            let responseDict: [String: Any] = [ "authorization_code" : self.authorizationCode ]
+            
+            self.commandDelegate.send(CDVPluginResult(status: CDVCommandStatus_OK, messageAs: responseDict), callbackId: command.callbackId)
+            
             return self.authorizationCode
         }
         
