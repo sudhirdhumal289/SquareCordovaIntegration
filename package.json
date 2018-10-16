@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-square-reader",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Provide functionality to integrate the Square Reader SDK integration in iOS / Android app.",
   "cordova": {
     "id": "cordova-plugin-square-reader",
