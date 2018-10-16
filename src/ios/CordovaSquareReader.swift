@@ -62,7 +62,7 @@ import AVKit
     @objc(retrieveAuthorizationCode:)
     func retrieveAuthorizationCode(command: CDVInvokedUrlCommand) -> String {
         // If already authorized then do not authorize again.
-        if SQRDReaderSDK.shared.isAuthorized {
+        if SQRDReaderSDK.shared.isAuthorized &&  self.authorizationCode != "" {
             return self.authorizationCode
         }
         

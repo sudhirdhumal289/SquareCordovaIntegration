@@ -36,6 +36,7 @@ var retrieveAuthParams = {
     "personalAccessToken": "<YOUR PERSONAL ACCESS TOKEN>",
     "locationId": "<LOCATION ID OF>"
 };
+// Authorization code will be fetched from Square if previous authorization code is expired/empty
 window['squarereader'].retrieveAuthorizationCode(retrieveAuthParams, function (response) {
     console.log("Application authorization code: " + response.authorization_code);
 
