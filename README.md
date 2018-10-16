@@ -1,6 +1,6 @@
 # Cordova Square Reader SDK
 
-A Cordova plugin to interface with the native Square Reader POS SDKs.
+A Cordova plugin to interface with the native Square Reader SDK.
 
 # Install
 
@@ -17,6 +17,8 @@ For more details refer [Square Reader SDK Documentation](https://docs.connect.sq
 Sub Step from Step 3 - "Update your Info.plist" can be skipped. Plugin will auto configure this.
 
 ## Pair the card reader
+
+NOTE: Square SDK needs to be authorized before initiating the pairing.
 
 ```javascript
 window['squarereader'].pairCardReaders(function () {

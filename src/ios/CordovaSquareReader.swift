@@ -6,55 +6,80 @@ import AVKit
     private lazy var locationManager = CLLocationManager()
     private var currentCommand: CDVInvokedUrlCommand?
     private var locationPermissionCallback: ((Bool) -> ())?
+    var authorizationCode: String = ""
     
     override func pluginInitialize() {
-        requestLocationPermission()
-        requestMicrophonePermission()
-    }
-
-    @objc(setup:)
-    func setup(command: CDVInvokedUrlCommand) {
-        // Initialize the Square SDK
         SQRDReaderSDK.initialize(applicationLaunchOptions: nil)
+        
+        locationManager.delegate = self
+        
+        self.requestLocationPermission()
     }
     
     func requestLocationPermission() {
-        switch CLLocationManager.authorizationStatus() {
-        case .notDetermined:
+        let locationStatus = CLLocationManager.authorizationStatus()
+        let isLocationAccessGranted = (locationStatus == .authorizedWhenInUse || locationStatus == .authorizedAlways)
+        
+        if(isLocationAccessGranted) {
+            // Get microphone permission as location permission is already granted.
+            self.requestMicrophonePermission()
+        } else {
+            // Permission is not given yet, so ask for the location permission
             self.locationManager.requestWhenInUseAuthorization()
-        case .restricted, .denied:
-            print("location acess permission denied")
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        switch CLLocationManager.authorizationStatus() {
+        case .denied, .restricted:
+            print("Location permission denied.")
+            
+            // Permission denied - Square SDK needs this permission so ask again.
+            self.requestLocationPermission()
         case .authorizedAlways, .authorizedWhenInUse:
             print("Location services have already been authorized.")
+            
+            // Get microphone permission after location permission
+            self.requestMicrophonePermission()
+        case .notDetermined:
+            print("Location permission is not determined yet.")
         }
     }
 
     func requestMicrophonePermission() {
         AVAudioSession.sharedInstance().requestRecordPermission { authorized in
             if !authorized {
-                print("Denied to access microphone")
+                print("Microphone permission denied.")
+                
+                // Square SDK require Microphone permission so ask again.
+                self.requestMicrophonePermission()
             } else {
-                print("Allowed to access microphone")
+                print("Microphone permission granted.")
             }
         }
     }
     
     @objc(retrieveAuthorizationCode:)
     func retrieveAuthorizationCode(command: CDVInvokedUrlCommand) -> String {
-        var authorizationCode: String = ""
+        // If already authorized then do not authorize again.
+        if SQRDReaderSDK.shared.isAuthorized {
+            return self.authorizationCode
+        }
+        
+        self.authorizationCode = ""
         
         guard let commandParams = command.arguments.first as? [String: Any],
             let personalAccessToken = commandParams["personalAccessToken"] as? String else {
                 self.commandDelegate.send(CDVPluginResult(status: CDVCommandStatus_ERROR, messageAs: "No personal access token passed"), callbackId: command.callbackId)
                 
-                return authorizationCode
+                return self.authorizationCode
         }
         
         guard let commandParamsTwo = command.arguments.first as? [String: Any],
             let locationId = commandParamsTwo["locationId"] as? String else {
                 self.commandDelegate.send(CDVPluginResult(status: CDVCommandStatus_ERROR, messageAs: "No location ID specified"), callbackId: command.callbackId)
                 
-                return authorizationCode
+                return self.authorizationCode
         }
         
         let parameters = ["location_id": locationId]
@@ -94,7 +119,7 @@ import AVKit
                     print(json)
                     
                     if json["authorization_code"] != nil {
-                        authorizationCode = json["authorization_code"] as! String
+                        self.authorizationCode = json["authorization_code"] as! String
                     } else if json["message"] != nil {
                         self.commandDelegate.send(CDVPluginResult(status: CDVCommandStatus_ERROR, messageAs: json["message"] as? String), callbackId: command.callbackId)
                         return;
@@ -111,7 +136,7 @@ import AVKit
         
         task.resume()
         
-        return authorizationCode
+        return self.authorizationCode
     }
     
     @objc(authorizeReaderSDKIfNeeded:)
@@ -222,25 +247,36 @@ import AVKit
         let readerSettingsController = SQRDReaderSettingsController(
             delegate: self
         )
-        readerSettingsController.present(from: self.viewController)
         
-        self.commandDelegate.send(CDVPluginResult(status: CDVCommandStatus_OK), callbackId: command.callbackId)
+        self.currentCommand = command
+        
+        readerSettingsController.present(from: self.viewController)
     }
     
     @objc(readerSettingsControllerDidPresent:)
     func readerSettingsControllerDidPresent(
         _ readerSettingsController: SQRDReaderSettingsController) {
         print("Reader settings flow presented.")
+        
+        guard let currentCommand = self.currentCommand else {
+            return
+        }
+        self.commandDelegate.send(CDVPluginResult(status: CDVCommandStatus_OK), callbackId: currentCommand.callbackId)
+        
+        self.currentCommand = nil
     }
     
     @objc(readerSettingsController:didFailToPresentWithError:)
     func readerSettingsController(
         _ readerSettingsController: SQRDReaderSettingsController,
         didFailToPresentWith error: Error) {
+        print("Failed to present reader settings flow.")
+        
         guard let currentCommand = self.currentCommand else {
             return
         }
         self.commandDelegate.send(CDVPluginResult(status: CDVCommandStatus_ERROR, messageAs: error.localizedDescription), callbackId: currentCommand.callbackId)
+        
         self.currentCommand = nil
     }
 }
